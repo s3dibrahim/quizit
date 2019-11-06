@@ -1,0 +1,88 @@
+[
+    {
+        "1": "What Will Be The Output Of the Following Code ?\nif(1 + 1 + 1 + 1 + 1 == 5){\n\tSystem.out.print(\"TRUE\");\n}\n\telse{\n\tSystem.out.print(\"FALSE\");\n};",
+        "2": "Which Set class should be most popular in a multi-threading environment, considering performance constraint?",
+        "3": "Which Map class should be most popular in a multi-threading environment, considering performance constraint?",
+        "4": "Which allows the removal of elements from a collection?",
+        "5": "The Comparator interface contains the method?",
+        "6": "Which of those is synchronized?",
+        "7": "Which offers the best performance?",
+        "8": "What should we use when add and remove operations are more frequent than get operations?",
+        "9": "Iterator returned by ArrayList is?",
+        "10": "Iterator returned by CopyOnWriteArrayList is?"
+    },
+    {
+        "1": {
+            "a": "TRUE",
+            "b": "BOTH",
+            "c": "ERROR",
+            "d": "FALSE"
+        },
+        "2": {
+            "a": "HashSet",
+            "b": "ConcurrentSkipListSet",
+            "c": "LinkedHashSet",
+            "d": "CopyOnWriteArraySet"
+        },
+        "3": {
+            "a": "Hashtable",
+            "b": "CopyOnWriteMap",
+            "c": "ConcurrentHashMap",
+            "d": "ConcurrentMap"
+        },
+        "4": {
+            "a": "Enumeration",
+            "b": "Iterator",
+            "c": "Both",
+            "d": "None of the above"
+        },
+        "5": {
+            "a": "compareWith",
+            "b": "compareTo()",
+            "c": "compare()",
+            "d": "None of the above"
+        },
+        "6": {
+            "a": "TreeMap",
+            "b": "HashMap",
+            "c": "Hashtable",
+            "d": "LinkedHashMap"
+        },
+        "7": {
+            "a": "TreeMap",
+            "b": "HashMap",
+            "c": "Hashtable",
+            "d": "LinkedHashMap"
+        },
+        "8": {
+            "a": "LinkedList",
+            "b": "ArrayList",
+            "c": "Vector",
+            "d": "List"
+        },
+        "9": {
+            "a": "Fail-fast",
+            "b": "Fail-safe",
+            "c": "Fail",
+            "d": "None of the above"
+        },
+        "10": {
+            "a": "Fail-fast",
+            "b": "Fail-safe",
+            "c": "Fail",
+            "d": "None of the above"
+        }
+    },
+    {
+        "1": "a",
+        "2": "b",
+        "3": "b",
+        "4": "d",
+        "5": "c",
+        "6": "c",
+        "7": "b",
+        "8": "a",
+        "9": "a",
+        "10": "b"
+    }
+]
