@@ -1,5 +1,5 @@
+import 'package:Quizit/routes/home.dart';
 import 'package:flutter/material.dart';
-import 'routes/splash.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
-      home: SplashScreen(),
+      home: HomePage(),
     );
   }
 }
