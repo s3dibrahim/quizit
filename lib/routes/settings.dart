@@ -36,7 +36,7 @@ class _SettingsState extends State<Settings> {
             Card(
               child: ListTile(
                 title: Text('Show answer'),
-                trailing: Checkbox(
+                trailing: Switch(
                   value: _showAnswer,
                   onChanged: (val) => _onShowSettings(val),
                 ),
