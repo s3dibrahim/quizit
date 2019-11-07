@@ -1,0 +1,26 @@
+[
+    {
+        "question": "The term ‘Computer’ is derived from",
+        "a": "Latin",
+        "b": "German",
+        "c": "French",
+        "d": "Arabic",
+        "answer": "a"
+    },
+    {
+        "question": "Who is the father of Computer?",
+        "a": "Allen Turing",
+        "b": "Charles Babbage",
+        "c": "Simur Cray",
+        "d": "Augusta Adaming",
+        "answer": "b"
+    },
+    {
+        "question": "The basic operations performed by a computer are",
+        "a": "Arithmetic",
+        "b": "Logical",
+        "c": "Storage",
+        "d": "All the above",
+        "answer": "d"
+    }
+]

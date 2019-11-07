@@ -15,25 +15,25 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  var quizData;
+  List quizData;
   _QuizPageState(this.quizData);
 
   static Color defaultColor = Colors.indigoAccent;
   Color btnColor = defaultColor;
   int marks = 0;
-  int timer = 30;
-  int index = 1;
-  static const int questionsCount = 10,
-      questionIndex = 0,
-      choiceIndex = 1,
-      answerIndex = 2;
+  int timer;
+  int index = 0;
 
   Map<String, Color> btnColorMap;
 
-  bool cancelTimer = false;
+  bool _answerChecked = false;
   bool _showAnswer = false;
 
-  void resetButtonsColor() {
+  void _resetTimer() {
+    timer = 15;
+  }
+
+  void _resetButtonsColor() {
     btnColorMap = {
       "a": defaultColor,
       "b": defaultColor,
@@ -50,8 +50,9 @@ class _QuizPageState extends State<QuizPage> {
   void initState() {
     super.initState();
     _loadSettings();
-    resetButtonsColor();
-    startTimer();
+    _resetButtonsColor();
+    _resetTimer();
+    _startTimer();
   }
 
   @override
@@ -61,13 +62,13 @@ class _QuizPageState extends State<QuizPage> {
     }
   }
 
-  void startTimer() async {
+  void _startTimer() async {
     Timer.periodic(Duration(seconds: 1), (Timer t) {
       setState(() {
         if (timer < 1) {
           t.cancel();
           nextQuestion();
-        } else if (cancelTimer == true) {
+        } else if (_answerChecked == true) {
           t.cancel();
         } else {
           timer = timer - 1;
@@ -77,40 +78,43 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   void nextQuestion() {
-    cancelTimer = false;
-    timer = 30;
+    _answerChecked = false;
+    _resetTimer();
     setState(() {
-      if (index < questionsCount) {
+      if (index < quizData.length - 1) {
         index++;
       } else {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => ResultPage(marks: marks),
+          builder: (context) =>
+              ResultPage(marks: marks, totalQuestions: quizData.length),
         ));
       }
-      resetButtonsColor();
+      _resetButtonsColor();
     });
-    startTimer();
+    _startTimer();
   }
 
-  void checkAnswer(String selectedAnswer) {
-    String correctAnswer = quizData[answerIndex][index.toString()];
-    bool wrongAnswer = false;
-    if (selectedAnswer == correctAnswer) {
-      marks = marks + 5;
-      btnColor = Colors.green;
-    } else {
-      btnColor = Colors.red;
-      wrongAnswer = true;
-    }
-    setState(() {
-      btnColorMap[selectedAnswer] = btnColor;
-      if (wrongAnswer && _showAnswer) {
-        btnColorMap[correctAnswer] = Colors.green;
+  void _checkAnswer(String selectedAnswer) {
+    if (!_answerChecked) {
+      String correctAnswer = quizData[index]['answer'];
+      bool wrongAnswer = false;
+      if (selectedAnswer == correctAnswer) {
+        marks++;
+        btnColor = Colors.green;
+      } else {
+        btnColor = Colors.red;
+        wrongAnswer = true;
       }
-      cancelTimer = true;
-    });
+      setState(() {
+        btnColorMap[selectedAnswer] = btnColor;
+        if (wrongAnswer && _showAnswer) {
+          btnColorMap[correctAnswer] = Colors.green;
+        }
+        _answerChecked = true;
+      });
 
-    Timer(Duration(seconds: 1), nextQuestion);
+      Timer(Duration(seconds: 1), nextQuestion);
+    }
   }
 
   Widget choiceButton(String choice) {
@@ -120,9 +124,9 @@ class _QuizPageState extends State<QuizPage> {
         horizontal: 20.0,
       ),
       child: MaterialButton(
-        onPressed: () => cancelTimer ? null : checkAnswer(choice),
+        onPressed: () => _checkAnswer(choice),
         child: Text(
-          quizData[choiceIndex][index.toString()][choice],
+          quizData[index][choice],
           style: TextStyle(
             color: Colors.white,
             fontFamily: "Alike",
@@ -179,7 +183,7 @@ class _QuizPageState extends State<QuizPage> {
                 padding: EdgeInsets.fromLTRB(15, 30, 15, 15),
                 alignment: Alignment.bottomLeft,
                 child: Text(
-                  quizData[questionIndex][index.toString()],
+                  quizData[index]['question'],
                   style: TextStyle(
                     fontSize: 16.0,
                     fontFamily: "Quando",

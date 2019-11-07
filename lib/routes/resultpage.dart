@@ -3,9 +3,10 @@ import 'home.dart';
 
 class ResultPage extends StatefulWidget {
   final int marks;
-  ResultPage({@required this.marks});
+  final int totalQuestions;
+  ResultPage({@required this.marks, @required this.totalQuestions});
   @override
-  _ResultPageState createState() => _ResultPageState(marks);
+  _ResultPageState createState() => _ResultPageState(marks,totalQuestions);
 }
 
 class _ResultPageState extends State<ResultPage> {
@@ -21,21 +22,24 @@ class _ResultPageState extends State<ResultPage> {
 
   @override
   void initState(){
-    if(marks < 20){
+    double percent = marks / total * 100;
+    String percentStr = percent.toStringAsFixed(2);
+    if(percent < 50){
       image = images[2];
-      message = "You Should Try Hard..\n" + "You Scored $marks";
-    }else if(marks < 35){
+      message = "You Should Try Hard..\n" "You Scored $percentStr";
+    }else if(percent < 75){
       image = images[1];
-      message = "You Can Do Better..\n" + "You Scored $marks";
+      message = "You Can Do Better..\n" "You Scored $percentStr";
     }else{
       image = images[0];
-      message = "You Did Very Well..\n" + "You Scored $marks";
+      message = "You Did Very Well..\n" "You Scored $percentStr";
     }
     super.initState();
   }
 
   int marks;
-  _ResultPageState(this.marks);
+  int total;
+  _ResultPageState(this.marks,this.total);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
